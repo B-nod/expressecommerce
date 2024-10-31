@@ -9,6 +9,8 @@ const app = express()
 require('dotenv').config()
 
 const morgan = require('morgan')
+require('./db/connection')
+const bodyParser = require('body-parser') // to handle json data if not provide cannot read json data
 
 // Importing the categoryRoute module from the './routes/categoryRoute' file.
 // This route will handle requests related to 'categories', which might include 
@@ -17,6 +19,7 @@ const categoryRoute = require('./routes/categoryRoute')
 
 // middleware
 app.use(morgan('dev'))
+app.use(bodyParser.json()) // to read json data
 
 // Using the `app.use()` middleware function to define the base path for the routes.
 // In this case, the base URL for all routes defined in `categoryRoute` will be prefixed 
