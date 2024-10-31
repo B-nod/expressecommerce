@@ -8,10 +8,29 @@ const app = express()
 // from a '.env' file into the `process.env` object.
 require('dotenv').config()
 
+const morgan = require('morgan')
 
-app.use('/', (req,res)=>{
-      res.json({'message':'This is a express server'})
-})
+// Importing the categoryRoute module from the './routes/categoryRoute' file.
+// This route will handle requests related to 'categories', which might include 
+// things like fetching, creating, updating, or deleting categories.
+const categoryRoute = require('./routes/categoryRoute')
+
+// middleware
+app.use(morgan('dev'))
+
+// Using the `app.use()` middleware function to define the base path for the routes.
+// In this case, the base URL for all routes defined in `categoryRoute` will be prefixed 
+// with '/api'. 
+// For example, if `categoryRoute` contains a route for fetching all categories, 
+// the URL would be something like '/api/categories'.
+// All requests that start with '/api' will be forwarded to `categoryRoute` for handling.
+app.use('/api', categoryRoute)
+
+
+
+// app.use('/', (req,res)=>{
+//       res.json({'message':'This is a express server'})
+// })
 
 // Defining the port the server will listen on.
 // The `process.env.PORT` reads the 'PORT' environment variable, which could 
