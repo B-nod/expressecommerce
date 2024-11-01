@@ -8,7 +8,7 @@ exports.postProduct = async(req,res)=>{
         product_price: req.body.product_price,
         countInStock: req.body.countInStock,
         product_description:req.body.product_description,
-        product_image:req.body.product_image,
+        product_image:req.file.path,
         category:req.body.category,
     })
     product = await product.save()
@@ -53,7 +53,7 @@ exports.updateProduct = async (req, res) => {
             product_price: req.body.product_price,
             countInStock: req.body.countInStock,
             product_description: req.body.product_description,
-            product_image: req.body.product_image,
+            product_image: req.file.paths,
             category: req.body.category,
         }, { new: true });
 
