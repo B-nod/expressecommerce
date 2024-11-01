@@ -34,7 +34,8 @@ const productSchema = new mongoose.Schema({
     category:{
         type:ObjectId,
         required:true,
-        ref:'Category'
+        ref:'Category',
+        trim:true
     }
 }, {timestamps:true})
 
