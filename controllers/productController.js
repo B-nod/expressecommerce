@@ -16,3 +16,22 @@ exports.postProduct = async(req,res)=>{
     }
     res.send(product)
 }
+
+// to show all the product
+exports.productlist = async(req, res)=>{
+    const product = await Product.find()
+     if(!product){
+        return res.status(400).json({error:"something went wrong"})
+    }
+    res.send(product)
+
+}
+
+// product details
+exports.productDetails = async(req,res)=>{
+    const product = await Product.findById(req.params.id)
+    if(!product){
+        return res.status(400).json({error:"something went wrong"})
+    }
+    res.send(product)
+}
