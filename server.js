@@ -21,6 +21,7 @@ const productRoute = require('./routes/productRoute')
 // middleware
 app.use(morgan('dev'))
 app.use(bodyParser.json()) // to read json data
+app.use('/public/uploads', express.static('public/uploads'))
 
 // Using the `app.use()` middleware function to define the base path for the routes.
 // In this case, the base URL for all routes defined in `categoryRoute` will be prefixed 
