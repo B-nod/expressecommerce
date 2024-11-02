@@ -1,12 +1,13 @@
 const express = require('express')
 const { testFunction, postCategory, categoryList, categoryDetials, updateCategory, deleteCategory } = require('../controllers/categoryController')
 const router = express.Router()
+const{categoryValidation,validation}=require('../validation/validator')
 
 router.get('/demo', testFunction)
-router.post('/postcategory', postCategory) // to insert data we have to put method post
+router.post('/postcategory',categoryValidation, validation, postCategory) // to insert data we have to put method post
 router.get('/categorylist', categoryList)
 router.get('/categorydetail/:id', categoryDetials)
-router.put('/updatecategory/:id', updateCategory)
+router.put('/updatecategory/:id',categoryValidation, validation, updateCategory)
 router.delete('/deletecategory/:id', deleteCategory)
 
 module.exports=router
