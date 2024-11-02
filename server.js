@@ -17,6 +17,7 @@ const bodyParser = require('body-parser') // to handle json data if not provide 
 // things like fetching, creating, updating, or deleting categories.
 const categoryRoute = require('./routes/categoryRoute')
 const productRoute = require('./routes/productRoute')
+const userRoute = require('./routes/userRoute')
 
 // middleware
 app.use(morgan('dev'))
@@ -31,6 +32,7 @@ app.use('/public/uploads', express.static('public/uploads'))
 // All requests that start with '/api' will be forwarded to `categoryRoute` for handling.
 app.use('/api', categoryRoute)
 app.use('/api', productRoute)
+app.use('/api' ,userRoute)
 
 
 

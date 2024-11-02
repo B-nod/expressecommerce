@@ -37,6 +37,25 @@ userSchema.virtual('password')
     this.salt = uuidv1()
     this.hased_password=this.encryptPassword(password)
 })
-.get()
+.get(function(){
+    return this._password
+})
+
+// defining methods
+userSchema.methods = {
+    encryptPassword:function(password){
+        if(!password) return ''
+        try{
+            return crypto
+            .Hmac("sha1", this.salt)
+            .update(password)
+            .digest('hex')
+        }
+        catch(err){
+            return err
+        }
+
+    }
+}
 
 module.exports = mongoose.model('User', userSchema)
