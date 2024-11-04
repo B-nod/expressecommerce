@@ -7,11 +7,11 @@ const orderSchema = new mongoose.Schema({
         required:true,
         ref:'OrderItem'
     }],
-    shippingAdress1:{
+    shippingAddress1:{
         type:String,
         required:true,
     },
-    shippingAdress2:{
+    shippingAddress2:{
         type:String,
     },
     zip:{
