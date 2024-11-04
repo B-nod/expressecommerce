@@ -20,3 +20,5 @@ var transport = nodemailer.createTransport({
   }
   transport.sendMail(mailOptions)
 }
+
+module.exports = sentEmail

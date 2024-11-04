@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const {ObjectId} = mongoose.Schema
 
-const tokenSchema = new mongoose.SchemaType({
+const tokenSchema = new mongoose.Schema({
     token:{
         type:String,
         required:true
@@ -13,7 +13,7 @@ const tokenSchema = new mongoose.SchemaType({
     },
     createdAt:{
         type:Date,
-        default:Data.now(),
+        default:Date.now(),
         expires:86400
     }
 })
