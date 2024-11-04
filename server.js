@@ -11,6 +11,7 @@ require('dotenv').config()
 const morgan = require('morgan')
 require('./db/connection')
 const bodyParser = require('body-parser') // to handle json data if not provide cannot read json data
+const cors = require('cors')
 
 // Importing the categoryRoute module from the './routes/categoryRoute' file.
 // This route will handle requests related to 'categories', which might include 
@@ -25,7 +26,7 @@ const paymentRoute = require('./routes/paymentRoute')
 app.use(morgan('dev'))
 app.use(bodyParser.json()) // to read json data
 app.use('/public/uploads', express.static('public/uploads'))
-
+app.use(cors())
 // Using the `app.use()` middleware function to define the base path for the routes.
 // In this case, the base URL for all routes defined in `categoryRoute` will be prefixed 
 // with '/api'. 
