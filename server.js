@@ -19,6 +19,7 @@ const categoryRoute = require('./routes/categoryRoute')
 const productRoute = require('./routes/productRoute')
 const userRoute = require('./routes/userRoute')
 const orderRoute = require('./routes/orderRoute')
+const paymentRoute = require('./routes/paymentRoute')
 
 // middleware
 app.use(morgan('dev'))
@@ -35,7 +36,7 @@ app.use('/api', categoryRoute)
 app.use('/api', productRoute)
 app.use('/api' ,userRoute)
 app.use('/api', orderRoute)
-
+app.use('/api', paymentRoute)
 
 
 // app.use('/', (req,res)=>{
