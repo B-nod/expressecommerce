@@ -35,6 +35,8 @@ exports.postUser = async(req,res)=>{
                 })
             }
             // send email process
+            const url = process.env.FRONT_END_URL+'\/email\/confirmation\/'+token.token
+            // locahost:3000/email/confirmation/6y62
             sendEmail({
                 from:'no-reply@ecommerce.com',
                 to:user.email,

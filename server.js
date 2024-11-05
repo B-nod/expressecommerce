@@ -26,7 +26,9 @@ const paymentRoute = require('./routes/paymentRoute')
 app.use(morgan('dev'))
 app.use(bodyParser.json()) // to read json data
 app.use('/public/uploads', express.static('public/uploads'))
-app.use(cors())
+app.use(cors({
+    origin: process.env.FRONT_END_URL // Replace this with your client’s origin
+  }));
 // Using the `app.use()` middleware function to define the base path for the routes.
 // In this case, the base URL for all routes defined in `categoryRoute` will be prefixed 
 // with '/api'. 
