@@ -41,7 +41,8 @@ exports.postUser = async(req,res)=>{
                 from:'no-reply@ecommerce.com',
                 to:user.email,
                 subject:'Email Verification Link',
-                text:`Hello, \n\n please verify your email by click in the below link: \n\n http:\/\/${req.headers.host}\/api\/confirmation\/${token.token}`
+                text:`Hello, \n\n please verify your email by click in the below link: \n\n http:\/\/${req.headers.host}\/api\/confirmation\/${token.token}`,
+                html: `<h1>Verify Your Email Account </h1>  <a href="${url}">Click to verify</a>`
                 // http://localhost:8080/api/confirmation/456789
             })
             res.send(user)
