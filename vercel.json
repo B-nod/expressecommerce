@@ -1,22 +1,10 @@
 {
   "version": 2,
-   "functions": {
+  "functions": {
     "api/categories.js": { "memory": 256 },
     "api/products.js": { "memory": 256 },
     "api/users.js": { "memory": 256 },
     "api/orders.js": { "memory": 256 },
     "api/payments.js": { "memory": 256 }
   }
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
-    }
-  ]
 }
