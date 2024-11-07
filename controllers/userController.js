@@ -108,7 +108,7 @@ exports.signIn=async(req,res)=>{
         return res.status(400).json({error:'verify email first to continue'})
     }
     // now generate token with user id and jwt secret
-    const token = jwt.sign({_id:user._id}, process.env.JWT_SECRET)
+    const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET);
 
     // store token in the cookie
     res.cookie('myCookie', token, {expire:Date.now()+99999})
@@ -199,7 +199,8 @@ exports.signOut=(req,res)=>{
 // require sigin
 exports.requireSignin=expressjwt({
     secret:process.env.JWT_SECRET,
-    algorithms:['HS256']
+    algorithms:['HS256'],
+    requestProperty: 'user'  // Decoded JWT will be available in req.user
 })
 
 // middleware for user role
@@ -223,25 +224,23 @@ exports.requireUser = (req,res,next)=>{
         }
     })
 }
-
-// middleware for admin role
-exports.requireAdmin = (req,res,next)=>{
-    // verify JWT
+// Middleware for admin role
+exports.requireAdmin = (req, res, next) => {
     expressjwt({
-        secret:process.env.JWT_SECRET,
-        algorithms:['HS256']
-    })(req,res,(err)=>{
-        if(err){
-            return res.status(400).json({error:"Unauthorized"})
+        secret: process.env.JWT_SECRET,
+        algorithms: ['HS256'],
+        requestProperty: 'user'
+    })(req, res, (err) => {
+        if (err) {
+            return res.status(401).json({ error: 'Unauthorized' });
         }
-        // check the role
-        if(req.user.role === 1){
-            //grant access 
-            next()
+
+        console.log("User role in requireAdmin:", req.user.role);
+
+        if (req.user && req.user.role === 1) {
+            next(); // Grant access if the user is an admin
+        } else {
+            res.status(403).json({ error: 'Forbidden: Admin access only' });
         }
-        else{
-            // unauthorized role
-            return res.status(403).json({error:'Forbidden'})
-        }
-    })
-}
+    });
+};
